@@ -6,7 +6,7 @@ Amazon-SQL is an inventory management system/database built with MySQL &amp; Nod
 - Enter the id number of the item you'd like to purchase
 - Check inventory of certain product
 
-## Admin View
+### Admin View
 *If you are a an admin, you can do the following things:*
 - Update inventory
 - Update Price
