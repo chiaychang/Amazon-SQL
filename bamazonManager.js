@@ -47,8 +47,8 @@ function viewProducts() {
     connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, res) {
         if (err) throw err;
         console.table(res);
+        runManager();
     });
-    runManager();
 }
 
 
@@ -56,8 +56,8 @@ function lowInventory() {
     connection.query("SELECT item_id, product_name, stock_quantity FROM products WHERE stock_quantity <= 5", function(err, res) {
         if (err) throw err;
         console.table(res);
+        runManager();
     });
-    runManager();
 }
 
 function addInventory() {
@@ -140,8 +140,8 @@ function addProduct() {
             //for development, show updated table
             connection.query("SELECT * FROM products", function(err, res) {
                 console.table(res);
+                runManager();
             });
-            runManager();
         });
     });
 }
@@ -150,4 +150,3 @@ function exit() {
     console.log("Logging Out...");
     connection.end();
 }
-
