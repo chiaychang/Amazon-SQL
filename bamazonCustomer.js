@@ -63,6 +63,33 @@ var runPurchase = function() {
                     }], function(error) {
                         if (error) throw err;
 
+                        //update total_sales column in the departments table
+                        //first make all data from deparemnts available for manipulation
+                        connection.query("SELECT * FROM departments", function(err, res) {
+
+                            var chosenDepartment;
+                            //find the department to add total_sales value to 
+                            for (var i = 0; i < res.length; i++) {
+                                if (res[i].department_name == chosenItem.department_name) {
+                                    chosenDepartment = res[i];
+                                }
+                            }
+
+
+                            //here we update the total_sales of the deparment of the product sold
+                            connection.query("UPDATE departments SET ? WHERE ?", [{
+
+                                total_sales: (chosenDepartment.total_sales += chosenItem.price * quantity).toFixed(2)
+                            }, {
+                                department_name: chosenItem.department_name
+                            }], function(error) {
+                                if (error) throw err;
+                            });
+
+
+                            // console.table(res);
+                        });
+
                         //for development, show updated table
                         console.log("Update successfully!\n");
                         connection.query("SELECT * FROM products", function(err, res) {
